@@ -9,9 +9,9 @@ namespace CacheDemo.Controllers
 {
 	public class HomeController : Controller
 	{
-		private readonly ReportService _reportService;
+		private readonly IReportService _reportService;
 
-		public HomeController(ReportService reportService)
+		public HomeController(IReportService reportService)
 		{
 			_reportService = reportService;
 		}

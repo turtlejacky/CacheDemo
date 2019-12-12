@@ -12,8 +12,11 @@ namespace CacheDemo
 		{
 			var containerBuilder = new ContainerBuilder();
 			containerBuilder.RegisterType<MemoryCacheProvider>().As<ICacheProvider>().SingleInstance();
-			containerBuilder.RegisterType<ReportService>().As<ReportService>();
-			containerBuilder.RegisterType<ProductRepository>().As<IProductRepository>().SingleInstance();
+			containerBuilder.RegisterType<ProductRepository>().As<IProductRepository>();
+			
+			containerBuilder.RegisterType<ReportService>().As<IReportService>().EnableInterfaceInterceptors();
+			containerBuilder.RegisterType<CacheInterceptor>().SingleInstance();
+
 			containerBuilder.RegisterControllers(typeof(MvcApplication).Assembly);
 			var container = containerBuilder.Build();
 			DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
